@@ -1,0 +1,10 @@
+{
+    "Form": true,
+    "SystemBase": true,
+    "DataTable": true,
+    "Acl": true,
+    "Market": true,
+    "WebsiteBase": true,
+    "DeployEnv": true,
+    "TelegramApi": true
+}

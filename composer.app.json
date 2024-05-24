@@ -1,0 +1,17 @@
+{
+  "name": "AKlebeLaravel/jumble_sale",
+  "type": "project",
+  "description": "Jumble Sale Market.",
+  "keywords": [
+    "framework",
+    "laravel",
+    "Sales"
+  ],
+  "license": "MIT",
+  "require": {
+  },
+  "require-dev": {
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
