@@ -25,7 +25,7 @@ source_db_user="user1"
 # =============================================
 destination_db_host="localhost"
 destination_db_port="3306"
-destination_db_name="jumble_Sale"
+destination_db_name="jumble_sale"
 destination_db_user="homestead"
 destination_db_password="secret"
 destination_mercy_root_path="/home/vagrant/projects/JumbleSale01"
