@@ -1,22 +1,22 @@
 ## JumbleSale
 
-**Jumble Sale** is a simple webshop like application based on the "Mercy App Scaffold".
-It acts with offers and is primary made to use as a **auction house** or **jumble sale / garage sale**
-Every user can be a customer and/or trader.
-
-Check the README.md from "Mercy App Scaffold" where the most of the stuff is explained already.
+**Jumble Sale** is a lightweight laravel webshop was specially designed as a flea market
+based on [Mercy App Scaffold](https://github.com/aklebe-laravel/mercy-scaffold).
+It acts with offers and was primary made to provide a **auction house** or **jumble sale / garage sale / flea market**
+Theoretical every user can be a customer and/or trader.
 
 Modules based on ```nwidart/laravel-modules```, Livewire based on ```mhmiton/laravel-modules-livewire```
 Documentation: https://laravelmodules.com/docs/v11/introduction
 
 ### Technical Features
 
-- Up to date in base dependencies: Laravel 11, PHP 8.2, Bootstrap 5, for npm 10.7
-- (Module ACL) ACL Permissions and User groups stored in DB
-- (Module DataTable) Self-made datatables using Livewire, Alpine.js, Bootstrap 5
-- (Module DeployEnv) Automatic Deployment/Terraforming with configured data like seeding
+- Up to date in base dependencies: Laravel 11, PHP 8.2, Bootstrap 5, npm 10.7
+- [Module ACL](https://github.com/aklebe-laravel/acl-module) ACL Permissions and User groups stored in DB
+- [Module DataTable](https://github.com/aklebe-laravel/data-table-module) Self-made datatables using Livewire, Alpine.js, Bootstrap 5
+- [Module Form](https://github.com/aklebe-laravel/form-module) Use easy configured forms
+- [Module DeployEnv](https://github.com/aklebe-laravel/deploy-env-module) Automatic Deployment/Terraforming with configured data like seeding
 - Merging multiple composer.json files on different locations like /Modules/* and /Themes/*
-- Config Settings
+- DB Config Settings
 - User and Product Rating
 
 ### Installation
@@ -207,7 +207,7 @@ pf CoreConfig
 
 #### Dusk - Browser Testing
 
-See: https://laravel.com/docs/10.x/dusk
+See: https://laravel.com/docs/11.x/dusk
 
 **Important:**
 You should run dusk on a separate system created for the dusk tests.
