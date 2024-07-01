@@ -25,7 +25,7 @@ class UserFactory extends Factory
             'email'             => fake()->unique()->safeEmail(),
             'shared_id'         => uniqid('js_suid_'),
             'email_verified_at' => now(),
-            'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password'          => '1234567',
             'remember_token'    => Str::random(10),
 //            'rating'            => fake()->randomFloat(4, 0, 100),
         ];
