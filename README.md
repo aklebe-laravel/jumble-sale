@@ -30,6 +30,7 @@ Follow this steps to install JumbleSale:
 1) Change into your new application directory and checkout the Jumble Sale Application:
    ```
    git clone https://github.com/aklebe-laravel/jumble-sale.git .
+   git checkout stable
    ```
 
 2) Start Install:
