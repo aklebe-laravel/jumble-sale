@@ -46,7 +46,7 @@ fullModulePath="$destination_mercy_root_path/$mercyModuleDirectory"
 f_env_check_mercy_deploy_mode_developer
 mercy_deploy_mode_developer=$?
 if [ $mercy_deploy_mode_developer -eq 0 ]; then
-  deploy_env_option="--dev-mode"
+  deploy_env_option="--dev-mode --debug"
 else
   deploy_env_option=""
 fi
@@ -75,7 +75,7 @@ echo "" # new line
 
 # pull system modules
 f_output_info "Git Update System Modules ..."
-php artisan deploy-env:require-module SystemBase,DeployEnv || exit
+eval "php artisan deploy-env:require-module SystemBase,DeployEnv $deploy_env_option" || exit
 
 # change back to mercy root
 cd "$destination_mercy_root_path" || exit
@@ -84,7 +84,7 @@ cd "$destination_mercy_root_path" || exit
 if [[ -z "$deploy_env_option" ]]; then
   php artisan deploy-env:require-dependencies || exit
 else
-  php artisan deploy-env:require-dependencies "$deploy_env_option" || exit
+  eval "php artisan deploy-env:require-dependencies $deploy_env_option" || exit
 fi
 
 # enable maintenance
