@@ -81,7 +81,7 @@ fi
 f_env_check_mercy_deploy_mode_developer
 mercy_deploy_mode_developer=$?
 if [ $mercy_deploy_mode_developer -eq 0 ]; then
-  mercy_deploy_mode="DEVELOPER (local,dev)"
+  mercy_deploy_mode="DEVELOPER (local,dev,dusk-testing)"
   deploy_env_option="--dev-mode"
 else
   mercy_deploy_mode="PRODUCTION (composer --no-dev)"
