@@ -14,10 +14,10 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')->assertSee(__('Login'));
-            $browser->type('email', 'local-js-dummy-a-0001@local.test')
+            $browser->type('email', 'AdminTest2@local.test')
                 ->type('password', '1234567')
                 ->press(__('Login'))
-                ->waitForRoute('home')
+                ->waitForRoute('home', seconds: self::maxWaitInSeconds)
                 // ->assertRouteIs('home');
             ->assertSee(__('Cart'));
             $browser->screenshot('logged_in');

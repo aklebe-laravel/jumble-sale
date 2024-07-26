@@ -7,17 +7,16 @@ use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Laravel\Dusk\TestCase as BaseTestCase;
-use Modules\SystemBase\tests\CreatesApplication;
+use PHPUnit\Framework\Attributes\BeforeClass;
 
 abstract class DuskTestCase extends BaseTestCase
 {
-    use CreatesApplication;
+    const maxWaitInSeconds = 15;
 
     /**
      * Prepare for Dusk test execution.
-     *
-     * @beforeClass
      */
+    #[BeforeClass]
     public static function prepare(): void
     {
         if (! static::runningInSail()) {

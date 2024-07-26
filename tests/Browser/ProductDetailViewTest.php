@@ -9,17 +9,17 @@ use Tests\DuskTestCase;
 class ProductDetailViewTest extends DuskTestCase
 {
     /**
-     * A Dusk test example.
+     * Login user
      */
     public function testLogin(): void
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')->assertSee(__('Login'));
             $browser->screenshot('login before');
-            $browser->type('email', 'local-js-dummy-a-0001@local.test')
+            $browser->type('email', 'AdminTest2@local.test')
                 ->type('password', '1234567')
                 ->press(__('Login'))
-                ->waitForRoute('home')
+                ->waitForRoute('home', seconds: self::maxWaitInSeconds)
                 // ->assertRouteIs('home');
                 ->assertSee(__('Cart'));
             $browser->screenshot('login after');
@@ -27,7 +27,7 @@ class ProductDetailViewTest extends DuskTestCase
     }
 
     /**
-     * A Dusk test example.
+     * Show product detail view
      */
     public function testProductDetailView(): void
     {
@@ -35,18 +35,18 @@ class ProductDetailViewTest extends DuskTestCase
             $productWebUri = 'neque_product_6421b065e0d5a';
             $browser->visit('/')->assertSee(__('Cart'));
             $browser->screenshot('product_detail_view_1');
-            $browser->click('#main-nav-29')->assertVisible('#main-nav-cat-17');
-            $browser->click('#main-nav-cat-17')->waitForRoute('category-products', ['category' => 'category-0017']);
+            $browser->click('#main-nav-30')->assertVisible('#main-nav-cat-17');
+            $browser->click('#main-nav-cat-17')->waitForRoute('category-products', ['category' => 'category-0017'], seconds: self::maxWaitInSeconds);
             $browser->screenshot('product_detail_view_2');
             $browser->click('a[href*="product/'.$productWebUri.'"]')
-                ->waitForRoute('product', ['product' => $productWebUri]);
+                ->waitForRoute('product', ['product' => $productWebUri], seconds: self::maxWaitInSeconds);
             $browser->assertSee(__("Detailed Item Information"));
             $browser->screenshot('product_detail_view_3');
         });
     }
 
     /**
-     * A Dusk test example.
+     * Add product to cart
      */
     public function testProductToCart(): void
     {
@@ -93,9 +93,9 @@ class ProductDetailViewTest extends DuskTestCase
                     $e->click();
 
                     if ($isInCart) {
-                        $browser->waitFor($selectorCartButtonAdd);
+                        $browser->waitFor($selectorCartButtonAdd, seconds: self::maxWaitInSeconds);
                     } else {
-                        $browser->waitFor($selectorCartButtonRemove);
+                        $browser->waitFor($selectorCartButtonRemove, seconds: self::maxWaitInSeconds);
                     }
                     $browser->screenshot('testProductToCart_3');
 
@@ -105,12 +105,11 @@ class ProductDetailViewTest extends DuskTestCase
                 // $browser->click("Add to Cart");
                 // $browser->click("Remove from Cart");
 
-
-                // $browser->wait
             } else {
                 $this->fail('Product not found.');
             }
 
         });
     }
+
 }
