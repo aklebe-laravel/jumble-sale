@@ -47,6 +47,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
     /**
      * @return $this
      */
