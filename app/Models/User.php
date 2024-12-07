@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -44,7 +45,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password'          => 'hashed',
         ];
     }
 
@@ -61,6 +62,26 @@ class User extends Authenticatable
         ], $attributes));
 
         return $this;
+    }
+
+    /**
+     * @return Builder
+     */
+    public static function getBuilderFrontendItems(): Builder
+    {
+        return self::query()->frontendItems();
+    }
+
+    /**
+     * scope frontendItems()
+     *
+     * @param  Builder  $query
+     *
+     * @return Builder
+     */
+    public function scopeFrontendItems(Builder $query): Builder
+    {
+        return $query;
     }
 
 }
