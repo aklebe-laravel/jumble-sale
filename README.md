@@ -138,6 +138,16 @@ Note: more files could be created by 3rd party modules using the event ```Deploy
 Try to keep all stuff in modules and/or themes,
 and keep the app files clean.
 
+### Seeder
+
+Module seeders can be configured in ```Modules/xxx/config/seeders.php```
+
+To start the module market use the following
+
+```
+php artisan module:seed Market
+```
+
 #### Modules
 
 Folder ```/Modules``` for modules with their own git repo
