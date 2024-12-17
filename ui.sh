@@ -117,6 +117,7 @@ function f_show_ui() {
   f_output_info "    - composer dump-autoload"
   f_output_info "    - composer update"
   f_output_info "[p] Git pull main app only"
+  f_output_info "[o] Optimize (Cache config, routes, events, ...)"
   f_output_info "[i] ide-helper generate (facades,models,meta)"
   f_output_info "[t] show last log (using less, press 'ctrl+c', 'q' to exit)"
   f_output_info "[q] Quit"
@@ -165,6 +166,11 @@ while [ true ]; do
   if [[ "$SELECT" == $'p' ]]; then
     f_output_info "Starting Git Pull ..."
     git pull || exit
+  fi
+
+  if [[ "$SELECT" == $'o' ]]; then
+    f_output_info "Optimizing ..."
+    php artisan optimize || exit
   fi
 
   if [[ "$SELECT" == $'u' ]]; then
