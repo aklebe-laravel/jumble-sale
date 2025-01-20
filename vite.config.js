@@ -22,4 +22,8 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        origin: 'http://localhost',
+        cors: true,
+    }
 });
