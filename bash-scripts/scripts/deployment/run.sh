@@ -87,6 +87,10 @@ else
   eval "php artisan deploy-env:require-dependencies $deploy_env_option" || exit
 fi
 
+# generate changelog if not already exists
+f_output_info "Generating changelog ..."
+php artisan website-base:changelog || exit
+
 # enable maintenance
 f_maintenance_disable || exit
 
