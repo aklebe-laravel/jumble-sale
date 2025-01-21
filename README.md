@@ -30,6 +30,8 @@ Follow this steps to install JumbleSale:
 1) Change into your new application directory and checkout the Jumble Sale Application:
    ```
    git clone https://github.com/aklebe-laravel/jumble-sale.git .
+   ```
+   ```
    git checkout stable
    ```
 
@@ -62,13 +64,32 @@ Follow this steps to install JumbleSale:
    ```
    ./ui.sh
    ```
-   
+
    Troubleshooting:
-   ```./ui.sh``` runs ```php artisan deploy-env:update-bash``` at very first to update ```system.sh``` 
+   ```./ui.sh``` runs ```php artisan deploy-env:update-bash``` at very first to update ```system.sh```
    based on ```.env```. If you have errors from artisan but ```system.sh``` was properly generated before,
    you can run ```./ui.sh -n``` to avoid the update-bash. But don't do it by default.
-   
-   
+
+### Additional steps for your local development env
+
+After install all thing:
+
+1) Create ide-helper stuff
+   ```
+   php artisan clear-compiled
+   php artisan ide-helper:generate
+   php artisan ide-helper:models -M
+   php artisan ide-helper:meta
+   ```
+2) Copy your images for seedings to ```app/seeder/images/samples/products``` (check config ```seeders.users.media_items.image_storage_source_path```)
+3) Data seeding to create users, products, medias, etc ... (feel free to adjust your config ```seeders.php```)
+   ```
+   php artisan module:seed Market
+   ```
+   Use following to undo seeds (and edit datetime part):
+   ```
+   php artisan market:manage model-* delete --since-created="2073-03-27 17:00"
+   ```
 
 ### Update/Build
 
@@ -147,6 +168,8 @@ To start the module market use the following
 ```
 php artisan module:seed Market
 ```
+
+Also see module specific seeder info!
 
 #### Modules
 
