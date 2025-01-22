@@ -34,7 +34,7 @@ function gitFetchAndCheckout() {
     echo "Try checkout branch '$2' in '$1' ..."
 
 #    if output=$(git status --porcelain) && [ -z "$output" ]; then
-    if [ -z "$(git status --porcelain)" ]; then
+    if [ -z "$(git status --untracked-files=no --porcelain)" ]; then
       git fetch origin "$2" || return 101
       git checkout "$2" || return 102
       git pull || return 103
