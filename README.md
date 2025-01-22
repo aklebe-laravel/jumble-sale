@@ -65,11 +65,6 @@ Follow this steps to install JumbleSale:
    ./ui.sh
    ```
 
-   Troubleshooting:
-   ```./ui.sh``` runs ```php artisan deploy-env:update-bash``` at very first to update ```system.sh```
-   based on ```.env```. If you have errors from artisan but ```system.sh``` was properly generated before,
-   you can run ```./ui.sh -n``` to avoid the update-bash. But don't do it by default.
-
 ### Additional steps for your local development env
 
 After install all thing:
@@ -95,11 +90,23 @@ After install all thing:
 
 #### (Pre-)Update (externals)
 
-If you have trouble with autoloader by installed/created new modules, it's recommended
-to run type ```./ui.sh``` and press choose ```[e]``` in menu to update/find all existing modules
-and calling composer dump-autoload. After that, the update/build below should work fine.
+##### Troubleshooting in ui.sh
 
-#### Update
+If you have trouble with autoloader or something like that by installed/created new modules:
+
+1) ```./ui.sh``` internally runs ```php artisan deploy-env:update-bash``` at very first to update ```system.sh```
+   based on your ```.env``` and also can read your configs. If you have errors from artisan but ```system.sh``` was properly generated before,
+   you can run ```./ui.sh -n``` to avoid the update-bash. But don't do it by default.
+
+2) If step 1) not works type ```./bash-scripts/scripts/deployment/raw-update.sh``` to update all modules and themes without using any php/artisan calls. 
+   Also ```./bash-scripts/scripts/deployment/raw-update.sh {branch-name}``` could be an option for you.
+   By using this script, your ```settings.sh``` should be prepared by any last call, or at least adjusted manually. 
+
+3) If you not sure about your current ```settings.sh```, try run ```./ui.sh``` and choose ```[r]``` instead.
+
+After that, the common update/build by ```./ui.sh``` should work fine.
+
+#### Common Updates
 
 To run all-in-one update type ```./ui.sh``` and press choose ```[u]``` in menu.
 
