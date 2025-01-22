@@ -65,6 +65,7 @@ f_confirmation_mercy_root_settings "Checkout branch '$branchToCheckout' for all 
 # =============================================
 if [ -d "$destination_mercy_root_path" ]; then
   gitFetchAndCheckout "$destination_mercy_root_path" "$branchToCheckout"
+  [ ! $? -eq 0 ] && { exit 1; } # return not 0 = error and exit
 fi
 
 # =============================================
@@ -73,6 +74,7 @@ fi
 for d in $fullModulePath/*; do
   if [ -d "$d" ]; then
     gitFetchAndCheckout "$d" "$branchToCheckout"
+    [ ! $? -eq 0 ] && { exit 1; } # return not 0 = error and exit
   fi
 done
 
@@ -82,6 +84,7 @@ done
 for d in $fullThemePath/*; do
   if [ -d "$d" ]; then
     gitFetchAndCheckout "$d" "$branchToCheckout"
+    [ ! $? -eq 0 ] && { exit 1; } # return not 0 = error and exit
   fi
 done
 
