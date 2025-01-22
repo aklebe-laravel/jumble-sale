@@ -34,19 +34,21 @@ function gitFetchAndCheckout() {
     echo "Try checkout branch '$2' in '$1' ..."
 
     if output=$(git status --porcelain) && [ -z "$output" ]; then
+      git fetch origin "$2" || return 101
+      git checkout "$2" || return 102
+      git pull || return 103
       echo "OK!"
+      echo "" # new line
     else
       echo "Skipped! No clean git repository."
+      echo "" # new line
+      # no error
     fi
-
-    git fetch origin "$2"
-    git checkout "$2"
-    echo "" # new line
 
   else
 
     echo "No git found in '$1'."
-    return 1
+    return 110
 
   fi
 

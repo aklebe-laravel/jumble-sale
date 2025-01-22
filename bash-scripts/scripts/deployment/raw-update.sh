@@ -76,8 +76,5 @@ cd "$destination_mercy_root_path" || exit
 composer dump-autoload
 composer update
 
-# finish
-f_output_success "Extern Deployment finished successfully!\n"
-
 # restore current directory
 cd "$BASEDIR" || exit
