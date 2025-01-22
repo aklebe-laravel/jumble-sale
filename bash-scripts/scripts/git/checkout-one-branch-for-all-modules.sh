@@ -36,11 +36,21 @@ branchToCheckout="$1"
 # include functions we need ...
 # =============================================
 . "$PROJECTDIR/functions/output.sh"
+. "$PROJECTDIR/functions/os.sh"
 . "$PROJECTDIR/functions/confirmation.sh"
 
 # =============================================
 # calculate variables depends on config
 # =============================================
+if [[ -z "$mercyModuleDirectory" ]]; then
+  f_output_error "No module directory defined: '$mercyModuleDirectory'"
+  exit 1
+fi
+if [[ -z "$mercyThemeDirectory" ]]; then
+  f_output_error "No theme directory defined: '$mercyThemeDirectory'"
+  exit 1
+fi
+
 fullModulePath="$destination_mercy_root_path/$mercyModuleDirectory"
 fullThemePath="$destination_mercy_root_path/$mercyThemeDirectory"
 
@@ -51,39 +61,10 @@ f_confirmation_mercy_root_settings "Checkout branch '$branchToCheckout' for all 
 [ ! $? -eq 0 ] && { exit 1; } # return not 0 = error and exit
 
 # =============================================
-#
-# =============================================
-function gitStuff() {
-
-      # check its a git repo
-      if [ -f "$1/.git/config" ]; then
-
-        cd "$1" || exit
-        echo "Try branch '$2' in '$1' ..."
-
-        if output=$(git status --porcelain) && [ -z "$output" ]; then
-          echo "OK!"
-        else
-          echo "Skipped! No clean git repository."
-        fi
-
-        git fetch origin "$2"
-        git checkout "$2"
-        echo "" # new line
-
-      else
-
-        echo "No git found in '$1'."
-
-      fi
-
-}
-
-# =============================================
 # App itself
 # =============================================
 if [ -d "$destination_mercy_root_path" ]; then
-  gitStuff "$destination_mercy_root_path" "$branchToCheckout"
+  gitFetchAndCheckout "$destination_mercy_root_path" "$branchToCheckout"
 fi
 
 # =============================================
@@ -91,7 +72,7 @@ fi
 # =============================================
 for d in $fullModulePath/*; do
   if [ -d "$d" ]; then
-    gitStuff "$d" "$branchToCheckout"
+    gitFetchAndCheckout "$d" "$branchToCheckout"
   fi
 done
 
@@ -100,7 +81,7 @@ done
 # =============================================
 for d in $fullThemePath/*; do
   if [ -d "$d" ]; then
-    gitStuff "$d" "$branchToCheckout"
+    gitFetchAndCheckout "$d" "$branchToCheckout"
   fi
 done
 

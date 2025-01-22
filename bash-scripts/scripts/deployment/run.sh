@@ -34,6 +34,7 @@ PROJECTDIR="$BASEDIR/../.."
 # =============================================
 . "$PROJECTDIR/functions/output.sh"
 . "$PROJECTDIR/functions/confirmation.sh"
+. "$PROJECTDIR/functions/os.sh"
 . "$PROJECTDIR/functions/mysql.sh"
 . "$PROJECTDIR/functions/env.sh" || exit
 . "$PROJECTDIR/functions/maintenance.sh"
@@ -67,7 +68,12 @@ f_maintenance_enable || exit
 
 # app pull
 f_output_info "Git Update App"
-git pull || exit
+#git pull || exit
+gitFetchAndCheckout "$destination_mercy_root_path" "$defaultBranch"
+if [ $? -ne 0 ]; then
+  exit
+fi
+
 echo "" # new line
 
 # @todo: check also if this script was updated and restart it
