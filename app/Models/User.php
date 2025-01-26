@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
@@ -55,8 +56,8 @@ class User extends Authenticatable
     public function makeWithDefaults(array $attributes): static
     {
         $this->setRawAttributes(array_merge([
-            'name'              => fake()->unique()->name(),
-            'email'             => fake()->unique()->safeEmail(),
+            'name'              => Str::uuid()->toString(),
+            'email'             => Str::uuid()->toString().'@local.test',
             'email_verified_at' => now(),
             'password'          => '1234567',
         ], $attributes));
