@@ -24,6 +24,7 @@
     "predis/predis": "^2.1",
     "pusher/pusher-php-server": "^7.2",
     "shipu/themevel": "^3.0",
+    "spatie/laravel-backup": "^9.2",
     "spatie/laravel-navigation": "*",
     "twbs/bootstrap-icons": "^1.9",
     "wikimedia/composer-merge-plugin": "^2.1"
