@@ -31,9 +31,6 @@ Follow this steps to install JumbleSale:
    ```
    git clone https://github.com/aklebe-laravel/jumble-sale.git .
    ```
-   ```
-   git checkout stable
-   ```
 
 2) Start Install:
    ```
