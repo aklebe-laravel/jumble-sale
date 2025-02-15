@@ -13,8 +13,7 @@ class HomepageTest extends DuskTestCase
     public function testExample(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                    ->assertSee(__('Login'));
+            $browser->visit('/')->assertSee(__('Login'));
         });
     }
 }

@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\BeforeClass;
 
 abstract class DuskTestCase extends BaseTestCase
 {
-    const maxWaitInSeconds = 15;
+    const int maxWaitInSeconds = 15;
 
     /**
      * Prepare for Dusk test execution.
@@ -19,8 +19,8 @@ abstract class DuskTestCase extends BaseTestCase
     #[BeforeClass]
     public static function prepare(): void
     {
-        if (! static::runningInSail()) {
-            static::startChromeDriver();
+        if (!static::runningInSail()) {
+            static::startChromeDriver(['--port=9515']);
         }
     }
 
@@ -40,12 +40,10 @@ abstract class DuskTestCase extends BaseTestCase
             ]);
         })->all());
 
-        return RemoteWebDriver::create(
-            $_ENV['DUSK_DRIVER_URL'] ?? 'http://localhost:9515',
-            DesiredCapabilities::chrome()->setCapability(
-                ChromeOptions::CAPABILITY, $options
-            )
-        );
+        //return RemoteWebDriver::create($_ENV['DUSK_DRIVER_URL'] ?? 'http://localhost:9515', DesiredCapabilities::chrome());
+        return RemoteWebDriver::create($_ENV['DUSK_DRIVER_URL'] ?? 'http://localhost:9515',
+            DesiredCapabilities::chrome()->setCapability(ChromeOptions::CAPABILITY,
+                $options));
     }
 
     /**
@@ -53,8 +51,7 @@ abstract class DuskTestCase extends BaseTestCase
      */
     protected function hasHeadlessDisabled(): bool
     {
-        return isset($_SERVER['DUSK_HEADLESS_DISABLED']) ||
-               isset($_ENV['DUSK_HEADLESS_DISABLED']);
+        return isset($_SERVER['DUSK_HEADLESS_DISABLED']) || isset($_ENV['DUSK_HEADLESS_DISABLED']);
     }
 
     /**
@@ -62,7 +59,6 @@ abstract class DuskTestCase extends BaseTestCase
      */
     protected function shouldStartMaximized(): bool
     {
-        return isset($_SERVER['DUSK_START_MAXIMIZED']) ||
-               isset($_ENV['DUSK_START_MAXIMIZED']);
+        return isset($_SERVER['DUSK_START_MAXIMIZED']) || isset($_ENV['DUSK_START_MAXIMIZED']);
     }
 }

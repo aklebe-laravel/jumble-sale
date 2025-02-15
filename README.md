@@ -255,17 +255,34 @@ If you don't do it, notice the following:
 Once the tests have completed, your .env file will be restored. That's why you should not run
 other processes on the same system.**
 
-Requirements:
+##### Requirements Quick Guide:
+
+chrome lib
 
 ```
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install ./google-chrome-stable_current_amd64.deb
 ```
 
+dusk itself:
+```
+composer require laravel/dusk --dev
+php artisan dusk:install
+php artisan dusk:chrome-driver --detect
+```
+
+For problems running dusk:
+```
+chmod -R 0755 vendor/laravel/dusk/bin/
+```
+
+
+##### Run Dusk Tests
+
 Dusk can be called with phpunit parameters. So if you want to call a specific class, use this format:
 
 ```
-php artisan dusk --filter ProductDetailViewTest
+php artisan dusk --filter HomepageTest
 ```
 
 to run whole dusk tests enter
