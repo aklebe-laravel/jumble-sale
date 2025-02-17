@@ -188,6 +188,14 @@ Folder ```/Themes``` for themes with their own git repo
 
 #### dump db
 
+##### spatie backup
+
+```
+php artisan backup:run --only-db
+```
+
+##### native dump
+
 To back up a db, you could run the following:
 
 ```
