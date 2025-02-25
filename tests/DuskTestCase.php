@@ -6,12 +6,20 @@ use Illuminate\Support\Collection;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Laravel\Dusk\Browser;
 use Laravel\Dusk\TestCase as BaseTestCase;
 use PHPUnit\Framework\Attributes\BeforeClass;
 
 abstract class DuskTestCase extends BaseTestCase
 {
     const int maxWaitInSeconds = 15;
+
+    const array users = [
+        'admin2' => [
+            'email' => 'AdminTest2@local.test',
+            'password' => '1234567',
+        ],
+    ];
 
     /**
      * Prepare for Dusk test execution.
@@ -60,5 +68,24 @@ abstract class DuskTestCase extends BaseTestCase
     protected function shouldStartMaximized(): bool
     {
         return isset($_SERVER['DUSK_START_MAXIMIZED']) || isset($_ENV['DUSK_START_MAXIMIZED']);
+    }
+
+    /**
+     * @return void
+     * @throws \Throwable
+     */
+    protected function loginAdmin(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')->assertSee(__('Login'));
+            $browser->screenshot('login before');
+            $browser->type('email', data_get(static::users, 'admin2.email'))
+                ->type('password', data_get(static::users, 'admin2.password'))
+                ->press(__('Login'))
+                ->waitForRoute('home', seconds: self::maxWaitInSeconds)
+                // ->assertRouteIs('home');
+                ->assertSee(__('Cart'));
+            $browser->screenshot('login after');
+        });
     }
 }

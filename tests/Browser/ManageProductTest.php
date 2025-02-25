@@ -13,17 +13,7 @@ class ManageProductTest extends DuskTestCase
      */
     public function testLogin(): void
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/')->assertSee(__('Login'));
-            $browser->screenshot('login before');
-            $browser->type('email', 'AdminTest2@local.test')
-                ->type('password', '1234567')
-                ->press(__('Login'))
-                ->waitForRoute('home', seconds: self::maxWaitInSeconds)
-                // ->assertRouteIs('home');
-                ->assertSee(__('Cart'));
-            $browser->screenshot('login after');
-        });
+        $this->loginAdmin();
     }
 
     /**
