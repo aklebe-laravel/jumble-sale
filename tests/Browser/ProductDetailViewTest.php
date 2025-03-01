@@ -15,7 +15,7 @@ class ProductDetailViewTest extends DuskTestCase
      */
     public function testLogin(): void
     {
-        $this->loginAdmin();
+        $this->loginDuskUser('admin');
     }
 
     /**
@@ -117,12 +117,7 @@ class ProductDetailViewTest extends DuskTestCase
             }
         }
 
-        // mini cart
-        $selectorCartBadge = '.main-nav-bar .mini-cart .badge';
-        // if ($e = $browser->element($selectorCartBadge.'[data-cart-loaded="1"]')) {
-        // $browser->screenshot('testProductToCart_2');
-        $cartBadgeElement = $browser->element($selectorCartBadge);
-        $count = $cartBadgeElement->getText();
+        $count = $this->getCartItemCount($browser);
 
         //
         $isInCart = $isInCartAtStart;
@@ -140,7 +135,7 @@ class ProductDetailViewTest extends DuskTestCase
             }
 
             // Check mini cart is updating
-            $browser->waitForTextIn($selectorCartBadge, $count, self::maxWaitInSeconds);
+            $this->waitForCartItemCount($browser, $count);
         }
 
     }

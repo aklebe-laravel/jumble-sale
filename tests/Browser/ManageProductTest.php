@@ -13,7 +13,7 @@ class ManageProductTest extends DuskTestCase
      */
     public function testLogin(): void
     {
-        $this->loginAdmin();
+        $this->loginDuskUser('admin');
     }
 
     /**
