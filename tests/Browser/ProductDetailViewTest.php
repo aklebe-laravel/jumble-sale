@@ -67,7 +67,7 @@ class ProductDetailViewTest extends DuskTestCase
             if ($product = Product::with([])->frontendItems()->first()) {
 
                 // // remove product from cart if exist
-                // $cart = app('market_settings')->getCurrentShoppingCart();
+                // $cart = app(ShoppingCartService::class)->getCurrentShoppingCart();
                 // $cart->removeProduct($product->getKey());
 
                 $browser->screenshot('testProductToCart_1');

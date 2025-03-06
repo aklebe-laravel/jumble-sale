@@ -55,7 +55,7 @@ class OfferProcessTest extends DuskTestCase
                 throw new Exception('Trader 1 not found');
             }
             // clear shopping cart
-            $cart = app(ShoppingCartService::class)->getCurrentShoppingCart($trader1->getKey());
+            $cart = app(ShoppingCartService::class)->getCurrentShoppingCart(true, $trader1->getKey());
             $cart->removeItems();
             // remove all orders created by user
             $orders = app(OfferService::class)->getOffersCreatedByUser($trader1->getKey());
@@ -118,9 +118,10 @@ class OfferProcessTest extends DuskTestCase
             // Click Mini Cart to show cart
             $browser->scrollTo($this->selector('mini-cart'))->click($this->selector('mini-cart'));
 
-            // Click list potential orders
-            $btnOfferPrepare = '.btn-potential-offers';
-            $browser->assertVisible($btnOfferPrepare)->click($btnOfferPrepare);
+            // skip this because this view is skipped when items from one user only
+            //// Click list potential orders
+            //$btnOfferPrepare = '.btn-potential-offers';
+            //$browser->assertVisible($btnOfferPrepare)->click($btnOfferPrepare);
 
             // Click create order and edit (to make order with status APPLIED)
             $btnOfferCreate = '.btn-create-and-edit-offer';
