@@ -196,8 +196,9 @@ abstract class DuskTestCase extends BaseTestCase
 
         if ($waitForCloseForm) {
             $browser->waitUntilMissing($this->selector($formConfigSelector, 'opened-form'), self::maxWaitInSeconds);
-            $browser->waitUntilMissing($this->selector($formConfigSelector, '.fullscreen-overlay'), self::maxWaitInSeconds);
         }
+
+        $browser->waitUntilMissing($this->selector($formConfigSelector, '.fullscreen-overlay'), self::maxWaitInSeconds);
 
         // wait if needed
         if ($waitForConfigSelector !== null) {
