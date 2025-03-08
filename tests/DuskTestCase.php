@@ -26,6 +26,7 @@ abstract class DuskTestCase extends BaseTestCase
         'opened-form'        => '.dt-edit-form',
         'offer-dt'           => '.dt-auto-Offer-1',
         'offer-dt-first-row' => '.dt-auto-Offer-1 tr:first-child',
+        'product-form'       => '.dt-form-type-Product',
         'message-box'        => '.modal-message-box',
     ];
 

@@ -36,10 +36,8 @@ class ManageProductTest extends DuskTestCase
             // $browser->script("document.getElementsByClassName('form-actions')[0].scrollIntoView()");
 
             // there are at least 2 buttons (media dependent)
-            $acceptButtonSelector = '.dt-edit-form .form-actions .form-action-accept:nth-child(1)';
-            $browser->scrollTo($acceptButtonSelector)->waitFor($acceptButtonSelector, self::maxWaitInSeconds);
-            $browser->screenshot('manage_product_3');
-            $browser->click($acceptButtonSelector)->assertDontSee($acceptButtonSelector)->waitForTextIn('.form-container .messages', __(":name updated.", ['name' => __('Product')]), self::maxWaitInSeconds);
+            $this->clickFormActionAndWaitFor($browser, 'product-form', '.form-action-accept');
+            $browser->waitForTextIn('.form-container .messages', __(":name updated.", ['name' => __('Product')]), self::maxWaitInSeconds);
             $browser->screenshot('manage_product_4');
         });
     }
