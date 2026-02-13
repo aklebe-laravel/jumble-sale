@@ -23,7 +23,14 @@ export default defineConfig({
         }),
     ],
     server: {
-        origin: 'http://localhost',
-        cors: true,
-    }
+        hmr: {
+            host: 'test-box-02.local',
+            protocol: 'wss', // Wichtig für SSL
+        },
+        // Falls du Vite direkt über den Browser aufrufen musst:
+        host: '0.0.0.0',
+        watch: {
+            usePolling: true,
+        },
+    },
 });

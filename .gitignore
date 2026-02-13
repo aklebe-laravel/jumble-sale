@@ -5,8 +5,9 @@
 /public/storage
 /public/Themes
 /public/.well-known
-/storage/*.key
+/storage
 /vendor
+/docker
 /.idea
 /.vscode
 .env
