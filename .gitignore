@@ -5,9 +5,25 @@
 /public/storage
 /public/Themes
 /public/.well-known
-/storage
+# Ignore all log files
+/storage/logs/*.log
+
+# Ignore all cache files
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+
+# If you want to ignore all uploaded files, uncomment the next line
+/storage/app/public/*
+
+# Do not ignore the .gitignore files inside these folders
+!/storage/logs/.gitignore
+!/storage/framework/.gitignore
+!/storage/framework/cache/.gitignore
+!/storage/framework/sessions/.gitignore
+!/storage/framework/views/.gitignore
+
 /vendor
-/docker
 /.idea
 /.vscode
 .env

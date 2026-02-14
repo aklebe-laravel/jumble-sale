@@ -3,10 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Illuminate\Support\Facades\Log;
 
-return Application::configure(basePath: dirname(__DIR__))
-    ->booting(function (Application $app) {
+return Application::configure(basePath: dirname(__DIR__))->booting(function (Application $app) {
 
         // // @deprecated: not needed since laravel v11 can configured .env file in ...
         // $envConfigFile = base_path('env-boot-config.php');
@@ -25,16 +23,15 @@ return Application::configure(basePath: dirname(__DIR__))
         // } else {
         //     // die("not found $envConfigFile");
         // }
-        
-    })
-    ->booted(function (Application $app) {
+
+    })->booted(function (Application $app) {
         // all modules boot() was processed ...
-    })
-    ->withRouting(web: __DIR__.'/../routes/web.php', commands: __DIR__.'/../routes/console.php', health: '/up',)
-    ->withMiddleware(function (Middleware $middleware) {
+    })->withRouting(web: __DIR__.'/../routes/web.php', commands: __DIR__.'/../routes/console.php', health: '/up')->withMiddleware(function (Middleware $middleware) {
         // ...
-    })
-    ->withExceptions(function (Exceptions $exceptions) {
+    })->withExceptions(function (Exceptions $exceptions) {
         // ...
-    })
-    ->create();
+    })->withMiddleware(function (Middleware $middleware) {
+        if ($trusted = env('TRUSTED_PROXIES')) {
+            $middleware->trustProxies(at: $trusted);
+        }
+    })->create();
