@@ -19,13 +19,23 @@ Documentation: https://laravelmodules.com/docs/v11/introduction
 - DB Config Settings
 - User and Product Rating
 
+Modules based on [nwidart/laravel-modules](https://github.com/nWidart/laravel-modules),
+Livewire based on [mhmiton/laravel-modules-livewire](https://github.com/mhmiton/laravel-modules-livewire),
+Themes based on [shipu/themevel](https://github.com/Shipu/themevel)
+
+### Prerequisite
+- Composer 2.9
+- PHP 8.5 with extensions curl and zip (```sudo apt install php8.5-curl php8.5-zip```)
+- *Recommended to use the docker method below*
+
 ### Installation
 
 By default, 7 modules will be installed for this shop system:
 SystemBase, DeployEnv, Acl, Form, DataTable, WebsiteBase, Market.
 The modules SystemBase and DeployEnv are required for every project.
 
-Follow this steps to install JumbleSale:
+
+#### Follow this steps to install JumbleSale:
 
 1) Change into your new application directory and checkout the Jumble Sale Application:
    ```
@@ -42,25 +52,40 @@ Follow this steps to install JumbleSale:
 
 3) Adjust your ```.env``` config file. At least notice the following:
    ```
-   APP_URL=xxx
+   APP_DOMAIN=xxx
    DB_DATABASE=xxx
    DB_USERNAME=xxx
    DB_PASSWORD=xxx
+   
+   # default settings for required modules
+   MODULE_DEPLOYENV_REQUIRE_MODULES_GIT="https://github.com/${{module_vendor_name}}/${{module_snake_name_git}}.git"
+   MODULE_DEPLOYENV_REQUIRE_MODULES_DEFAULT_VENDOR="aklebe-laravel"
+
+   # settings for your own modules
    MODULE_DEPLOYENV_MAKE_MODULE_AUTHOR_NAME="John Doe"
    MODULE_DEPLOYENV_MAKE_MODULE_AUTHOR_EMAIL="john.doe@localhost.test"
    MODULE_DEPLOYENV_MAKE_MODULE_COMPOSER_VENDOR_NAME="john-doe-laravel"
-   MODULE_DEPLOYENV_REQUIRE_MODULES_GIT="https://github.com/${{module_vendor_name}}/${{module_snake_name_git}}.git"
-   MODULE_DEPLOYENV_REQUIRE_MODULES_DEFAULT_VENDOR="aklebe-laravel"
    ```
+   
+4) Optionally if you use sail/docker:
+   - adjust the docker variables in your .env below ```# ======= Docker stuff =======```
+   - optionally create sail shorthand like ```echo "alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'" >> ~/.bashrc```
+   - install sail: ```php artisan sail:install --devcontainer```
+     - sail will also adjust your .env if needed
+   - from now use all commands prefixed with ```sail ``` (like ```sail composer update```) or enter the docker shell using ```sail shell```
+   - start docker ```sail up -d```
 
-4) The following menu provides shorthand update (via git) of your installed and/or configured modules and themes based
+5) update:
+   ```
+   # use in sail shell
+   ./ui.sh
+   ```
+   Description: The following menu (by ./ui.sh) provides shorthand update (via git) of your installed and/or configured modules and themes based
    on the config ```config/mercy-dependencies.php```. While run this (implicit with --no-interaction), you do not
    need to care about ```composer update```, ```php artisan migrate```
    and ```php artisan deploy-env:terraform-modules```. So execute the following script and choose ```[u]``` for system
-   update:
-   ```
-   ./ui.sh
-   ```
+
+### Updates / Rebuilds
 
 ### Additional steps for your local development env
 

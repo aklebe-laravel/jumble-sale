@@ -13,19 +13,20 @@ class ScheduleServiceProvider extends ScheduleBaseServiceProvider
     protected function bootEnabledSchedule(Schedule $schedule): void
     {
         /**
-         * Remove unused extra attributes
+         * Backups
+         * @todo: .env config
          */
-        $schedule->call(function () {
-
-            try {
-                if ((Artisan::call('backup:run --only-db')) !== 0) {
-                    Log::error("Backup failed in ".__METHOD__);
-                }
-            } catch (Throwable $exception) {
-                Log::error("Backup command not found in ".__METHOD__);
-            }
-
-        })->dailyAt('03:00');
+        //$schedule->call(function () {
+        //
+        //    try {
+        //        if ((Artisan::call('backup:run --only-db')) !== 0) {
+        //            Log::error("Backup failed in ".__METHOD__);
+        //        }
+        //    } catch (Throwable $exception) {
+        //        Log::error("Backup command not found in ".__METHOD__);
+        //    }
+        //
+        //})->dailyAt('03:00');
 
     }
 
