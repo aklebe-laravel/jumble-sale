@@ -93,10 +93,8 @@ After install all thing:
 
 1) Create ide-helper stuff
    ```
-   php artisan clear-compiled
-   php artisan ide-helper:generate
-   php artisan ide-helper:models -M
-   php artisan ide-helper:meta
+   ./ui.sh
+   # press i
    ```
 2) Copy your images for seedings to ```app/seeder/images/samples/products``` (check config ```seeders.users.media_items.image_storage_source_path```)
 3) Data seeding to create users, products, medias, etc ... (feel free to adjust your config ```seeders.php```)
