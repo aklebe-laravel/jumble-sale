@@ -1,8 +1,6 @@
 import {defineConfig} from 'vite';
 import laravel from 'laravel-vite-plugin';
 
-// todo: @import is deprecated, but @use is not working so far
-// todo: "quietDeps: true" at least prevents a lot of extern deprecated warnings
 export default defineConfig({
     css: {
         preprocessorOptions: {
@@ -24,7 +22,7 @@ export default defineConfig({
     ],
     server: {
         hmr: {
-            host: 'test-box-02.local',
+            host: process.env.APP_DOMAIN,
             protocol: 'wss', // Wichtig für SSL
         },
         // Falls du Vite direkt über den Browser aufrufen musst:
@@ -32,5 +30,7 @@ export default defineConfig({
         watch: {
             usePolling: true,
         },
+        port: process.env.VITE_PORT ? parseInt(process.env.VITE_PORT) : 5173,
+        strictPort: true, // Verhindert, dass Vite automatisch auf den nächsten Port ausweicht
     },
 });
