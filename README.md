@@ -35,7 +35,83 @@ SystemBase, DeployEnv, Acl, Form, DataTable, WebsiteBase, Market.
 The modules SystemBase and DeployEnv are required for every project.
 
 
-#### Follow this steps to install JumbleSale:
+#### Install JumbleSale with Sail
+
+1) Start Install:
+   ```
+   # get the repo
+   git clone https://github.com/aklebe-laravel/jumble-sale.git .
+   
+   # install
+   ./jumble-sale-install.sh
+   ```
+
+2) Adjust your ```.env```. At least this 2 vars:
+   ```
+   APP_DOMAIN=xxx
+   COMPOSE_PROJECT_NAME="Unique_Project_Name"
+   ```
+   If you want running multiple projects at the same time, you have to use different ports for the generated docker services.
+   So you need to change the ports below ```# ======= Docker stuff =======```
+
+3) Use sail:
+   ```
+   # optionally create sail shorthand
+   echo "alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'" >> ~/.bashrc
+   
+   # Install sail (will also adjust your .env if needed)
+   # We recommened to chose mariaDb, redis and mailPit in the upcoming menu
+   php artisan sail:install --devcontainer
+   
+   # from now use all commands prefixed with sail (like 'sail composer update') or enter the docker shell using 'sail shell'
+   
+   # start docker
+   sail up -d
+   ```
+
+4) Optional SSL: We recommend to use SSL as an extra layer.
+   1) Add a shared network docker
+      ```
+      docker network create proxy-gateway
+      ```
+   2) Create a local NPM (Nginx Proxy Manager) to handle your domains
+      compose.yaml (in your custom npm project folder):
+      ```
+      services:
+        npm:
+          image: 'jc21/nginx-proxy-manager:latest'
+          container_name: global-proxy
+          restart: unless-stopped
+          ports:
+            - '80:80'   # public HTTP
+            - '81:81'   # NPM Admin-Panel
+            - '443:443' # public HTTPS
+          volumes:
+            - ./data:/data
+            - ./letsencrypt:/etc/letsencrypt
+          networks:
+            - proxy-gateway
+ 
+      networks:
+        proxy-gateway:
+        external: true
+      ```
+   3) Start:
+      ```
+      docker compose up -d
+      ```
+      Access: http://localhost:81
+      Default-Login: admin@example.com / changeme
+
+5) Optional decide module branches in ```config/mercy-dependencies.php``` - 2 vars at top
+6) Start the first build
+   ```
+   # use in sail shell, press "u" in menu
+   ./ui.sh
+   ```
+
+
+#### Install JumbleSale without Sail:
 
 1) Change into your new application directory and checkout the Jumble Sale Application:
    ```

@@ -31,7 +31,5 @@ return Application::configure(basePath: dirname(__DIR__))->booting(function (App
     })->withExceptions(function (Exceptions $exceptions) {
         // ...
     })->withMiddleware(function (Middleware $middleware) {
-        if ($trusted = env('TRUSTED_PROXIES')) {
-            $middleware->trustProxies(at: $trusted);
-        }
+        // ...
     })->create();
