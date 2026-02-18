@@ -161,8 +161,6 @@ The modules SystemBase and DeployEnv are required for every project.
    need to care about ```composer update```, ```php artisan migrate```
    and ```php artisan deploy-env:terraform-modules```. So execute the following script and choose ```[u]``` for system
 
-### Updates / Rebuilds
-
 ### Additional steps for your local development env
 
 After install all thing:
@@ -172,17 +170,17 @@ After install all thing:
    ./ui.sh
    # press i
    ```
-2) Copy your images for seedings to ```app/seeder/images/samples/products``` (check config ```seeders.users.media_items.image_storage_source_path```)
+2) Copy your images for seedings to your **storage**: ```app/seeder/images/samples/products``` (check config ```seeders.users.media_items.image_storage_source_path```)
 3) Data seeding to create users, products, medias, etc ... (feel free to adjust your config ```seeders.php```)
    ```
    php artisan module:seed Market
    ```
-   Use following to undo seeds (and edit datetime part):
+   Use the following to undo seeds (edit datetime part):
    ```
    php artisan market:manage model-* delete --since-created="2073-03-27 17:00"
    ```
 
-### Update/Build
+### Updates / Rebuilds
 
 #### (Pre-)Update (externals)
 
